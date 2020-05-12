@@ -12,7 +12,7 @@ func TestTwoSum(t *testing.T) {
 	ans := twosum(nums, target)
 	sort.Ints(ans)
 	if ans == nil {
-		t.Errorf("twosum returned null")
+		t.Errorf("expecting %v got %v", ans1, ans)
 	}
 	for i, n := range ans {
 		if n != ans1[i] {
