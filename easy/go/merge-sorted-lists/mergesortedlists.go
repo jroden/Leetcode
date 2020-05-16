@@ -1,4 +1,4 @@
-package main
+package mergelists
 
 // https://leetcode.com/problems/merge-two-sorted-lists/
 
