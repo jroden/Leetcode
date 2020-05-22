@@ -20,4 +20,9 @@ func TestReverseInt(t *testing.T) {
 	if result != expected {
 		t.Errorf("expected %v got %v", expected, result)
 	}
+	result = reverse(-42933)
+	expected = -33924
+	if result != expected {
+		t.Errorf("expected %v got %v", expected, result)
+	}
 }
