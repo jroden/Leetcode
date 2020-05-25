@@ -10,41 +10,35 @@ type cdata struct {
 // V3 (coming soon)-- reduce runtime complexity using []cdata and map[string]*cdata
 //   (where *cdata corresponds to an element in a slice) to reduce runtime complexity
 
-// V2 (not finalized yet)-- uses always ordered array of structs
-
 func frequencySort(s string) string {
 	// chararray will always contain sorted (decreasing) cdata structs by frequency
 	chararray := []cdata{}
-	var charfound bool
+	chararraypmap := map[string]*cdata{}
 	for _, r := range s {
 		currchar := string(r)
-		charfound = false
-		for i, char := range chararray {
-			if char.c == currchar {
-				char.freq++
-				charfound = true
-				// if frequency of index-1 char is now less, swap the two to mantain sort
-				tmpi := i
-				for tmpi > 0 && chararray[tmpi-1].freq < char.freq {
-					tmp := chararray[tmpi-1]
-					chararray[tmpi-1] = char
-					char = tmp
-					tmpi--
-				}
-				// if i > 0 {
-				// 	for swapindex := i; swapindex >= 0; swapindex-- {
-				// 		if chararray[i-1].freq < char.freq {
-				// 		}
-				// 	}
-				// }
-			}
-		}
-		if charfound == false {
-			chararray = append(chararray, cdata{freq: 1, c: currchar})
+		if val, ok := chararraypmap[currchar]; ok {
+			// increment counter of character
+			val.freq++
+			// TODO: while previous element in charraray has less frequency, swap elements
+
+		} else {
+			// if character hasn't been encountered
+			newchar := cdata{c: currchar, freq: 1}
+			chararray = append(chararray, newchar)
+			chararraypmap[currchar] = &chararray[len(chararray)-1]
 		}
 	}
-	return "s"
+	// assemble return string
+	var rstring string
+	for _, cstruct := range chararray {
+		for i := 0; i < cstruct.freq; i++ {
+			rstring += cstruct.c
+		}
+	}
+	return rstring
 }
+
+// V2 (not finalized yet)-- uses always ordered array of structs
 
 // v1 solution O(n^2)
 
