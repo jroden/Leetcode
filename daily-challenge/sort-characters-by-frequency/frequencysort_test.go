@@ -23,4 +23,10 @@ func TestFrequencySort(t *testing.T) {
 	if actual != expected && actual != expectedtwo {
 		t.Errorf("expected %v got %v", expected, actual)
 	}
+	input = "raaeaedere"
+	expected = "eeeeaaarrd"
+	actual = frequencySort(input)
+	if actual != expected {
+		t.Errorf("expected %v got %v", expected, actual)
+	}
 }
